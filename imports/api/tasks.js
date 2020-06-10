@@ -6,7 +6,12 @@ export const Tasks = new Mongo.Collection('tasks');
 
 if (Meteor.isServer) {
     Meteor.publish('tasks', function tasksPublication() {
-        return Tasks.find();
+        return Tasks.find({
+            $or: [
+                { private: { $ne: true } },
+                { owner: this.userId }
+            ]
+        });
     });
 }
 
@@ -41,7 +46,7 @@ Meteor.methods({
 
     'tasks.setPrivate'(taskId, setToPrivate) {
         check(taskId, String);
-        check(setToPrivate, String);
+        check(setToPrivate, Boolean);
 
         const task = Tasks.findOne(taskId);
 
