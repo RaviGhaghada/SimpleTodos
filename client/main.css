@@ -132,3 +132,7 @@ header .hide-completed {
     padding-bottom: 5px;
   }
 }
+
+.due-buttons {
+  float: right;
+}

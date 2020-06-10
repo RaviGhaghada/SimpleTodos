@@ -78,11 +78,14 @@ export default class Task extends Component {
                 <span className="text">
                     <strong>{this.props.task.username}</strong>:{this.props.task.text}
 
-                    <span className={dueClassName}>
-                        {!isDue ? this.state.expirytime + " minutes left" : 'due'}
+                    => <span className={dueClassName}>
+                        {!isDue ? this.state.expirytime + " minutes left" : 'due by ' + Math.abs(this.state.expirytime) + ' minutes'}
                     </span>
-                    <button onClick={this.incrementDueLimit.bind(this)}>+</button>
-                    <button onClick={this.decrementDueLimit.bind(this)}>-</button>
+
+                    <div className="due-buttons">
+                        <button onClick={this.incrementDueLimit.bind(this)}>+</button>
+                        <button onClick={this.decrementDueLimit.bind(this)}>-</button>
+                    </div>
                 </span>
             </li>
         );

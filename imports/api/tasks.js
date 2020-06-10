@@ -78,10 +78,7 @@ Meteor.methods({
             throw new Meteor.Error('not-authorized');
         }
 
-        if (dueLimit <= 0) {
-            throw new Meteor.Error('invalid-due-limit')
-        }
-
+        dueLimit = (dueLimit < 0) ? 0 : dueLimit;
         Tasks.update(taskId, { $set: { dueLimit: dueLimit } });
     }
 });
