@@ -4,6 +4,8 @@ import Task from './Task.js';
 import { Tasks } from '../api/tasks.js';
 import { withTracker } from 'meteor/react-meteor-data';
 
+import AccountsUIWrapper from './AccountsUIWrapper.js'
+
 // App component - represents the whole app
 class App extends Component {
 
@@ -56,6 +58,7 @@ class App extends Component {
             Hide Completed Tasks
           </label>
 
+          <AccountsUIWrapper />
           <form className="new-task" onSubmit={this.handleSubmit.bind(this)}>
             <input type="text" ref="textInput" placeholder="Type to add new tasks" />
           </form>
