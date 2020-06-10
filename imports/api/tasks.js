@@ -28,7 +28,8 @@ Meteor.methods({
             text,
             createdAt: new Date(), // current date
             owner: this.userId,
-            username: Meteor.users.findOne(this.userId).username
+            username: Meteor.users.findOne(this.userId).username,
+            dueLimit: 30
         });
     },
 
@@ -65,5 +66,22 @@ Meteor.methods({
         }
 
         Tasks.update(taskId, { $set: { private: setToPrivate } });
+    },
+
+    'tasks.setDueLimit'(taskId, dueLimit) {
+        check(taskId, String);
+        check(dueLimit, Number);
+
+        const task = Tasks.findOne(taskId);
+        console.log(dueLimit)
+        if (task.owner !== this.userId) {
+            throw new Meteor.Error('not-authorized');
+        }
+
+        if (dueLimit <= 0) {
+            throw new Meteor.Error('invalid-due-limit')
+        }
+
+        Tasks.update(taskId, { $set: { dueLimit: dueLimit } });
     }
 });

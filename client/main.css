@@ -63,6 +63,14 @@ form {
   outline: 0;
 }
 
+.due {
+  color: red
+}
+
+.undue {
+  color: blue
+}
+
 ul {
   margin: 0;
   padding: 0;
