@@ -1,6 +1,9 @@
 import { Pie } from 'react-chartjs-2';
 import React, { Component } from 'react';
 
+/**
+ * A pie chart of the number of tasks open vs number of tasks closed
+ */
 export default class TaskStatusPieChart extends Component {
 
     constructor(props) {
@@ -9,9 +12,6 @@ export default class TaskStatusPieChart extends Component {
 
 
     render() {
-        console.log(this.props.complete);
-        console.log(this.props.open);
-
         return (<Pie data={{
             labels: ['Completed', 'Open'],
             datasets: [
