@@ -4,7 +4,7 @@ import Task from './Task.js';
 import { Tasks } from '../api/tasks.js';
 import { Meteor } from 'meteor/meteor'
 import { withTracker } from 'meteor/react-meteor-data';
-
+import TaskStatusPieChart from './TaskStatusPieChart';
 import AccountsUIWrapper from './AccountsUIWrapper.js'
 
 // App component - represents the whole app
@@ -68,6 +68,7 @@ class App extends Component {
             : ''
           }
         </header>
+        <TaskStatusPieChart complete={this.props.completeCount} open={this.props.incompleteCount} />
         <ul>
           {this.renderTasks()}
         </ul>
@@ -82,6 +83,7 @@ export default withTracker(() => {
   return {
     tasks: Tasks.find({}, { sort: { createdAt: -1 } }).fetch(),
     incompleteCount: Tasks.find({ checked: { $ne: true } }).count(),
+    completeCount: Tasks.find({ checked: true }).count(),
     currentUser: Meteor.user()
   };
 })(App);
