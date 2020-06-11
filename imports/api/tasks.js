@@ -77,7 +77,6 @@ Meteor.methods({
 
         // ensure that only the owner can change it
         const task = Tasks.findOne(taskId);
-        console.log(dueLimit)
         if (task.owner !== this.userId) {
             throw new Meteor.Error('not-authorized');
         }
