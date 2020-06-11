@@ -68,17 +68,23 @@ Meteor.methods({
         Tasks.update(taskId, { $set: { private: setToPrivate } });
     },
 
+    /**
+     * Set the due limit of a task 
+     */
     'tasks.setDueLimit'(taskId, dueLimit) {
         check(taskId, String);
         check(dueLimit, Number);
 
+        // ensure that only the owner can change it
         const task = Tasks.findOne(taskId);
         console.log(dueLimit)
         if (task.owner !== this.userId) {
             throw new Meteor.Error('not-authorized');
         }
 
+        // ensure that the dueLimit doesn't go below 0
         dueLimit = (dueLimit < 0) ? 0 : dueLimit;
+
         Tasks.update(taskId, { $set: { dueLimit: dueLimit } });
     }
 });
