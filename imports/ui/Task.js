@@ -94,7 +94,7 @@ export default class Task extends Component {
                 <span className="text">
                     <strong>{this.props.task.username}</strong>:{this.props.task.text}
 
-                    => <span className={dueClassName}>
+                    =&gt; <span className={dueClassName}>
                         {!isDue ? this.state.expirytime + " minutes left" : 'due by ' + Math.abs(this.state.expirytime) + ' minutes'}
                     </span>
 
